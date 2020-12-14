@@ -61,7 +61,7 @@
                 
                         <!-- Featured image -->
                         <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
-                          <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Sample image">
+                          <img class="img-fluid" src="{{ post.img.url }}" alt="Sample image">
                           <a>
                             <div class="mask rgba-white-slight"></div>
                           </a>
@@ -76,9 +76,9 @@
                         <!-- Post title -->
                         <h4 class="mb-3">{{ post.title }}</h4>
                         <!-- Excerpt -->
-                        <p class="dark-grey-text">{{ post.body }}</p>
+                        <p class="dark-grey-text">{{ post.body|truncatechars:100 }}</p>
                         <!-- Post data -->
-                        <p> <a class="font-weight-bold">{{ post.author.username }}</a>, {{ post.created }}</p>
+                        <p> <a class="font-weight-bold">@{{ post.author.username }}</a>, {{ post.created }}</p>
                         <!-- Read more button -->
                         <a class="btn btn-primary btn-md mx-0 btn-rounded" href="{{ post.get_absolute_url }}">Czytaj więcej</a>
                 

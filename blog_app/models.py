@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 
+
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -51,3 +52,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Komentarz dodany przez {} dla posta {}'.format(self.post)
+
