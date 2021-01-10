@@ -24,7 +24,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="justify-content-center nav navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Strona główna <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'blog_app:post_list' %}">Strona główna <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Użytkownicy</a>
@@ -56,6 +56,7 @@
                 <h1 class="page-header">
                     Najnowsze posty
                 </h1>
+                <a class="ml-sm-2 btn btn-outline-success float-right" href="{% url 'blog_app:post_add' %}">Dodaj post <span class="sr-only">(current)</span></a>
                 {% for post in obj %}
 
                   <!-- First Blog Post -->
