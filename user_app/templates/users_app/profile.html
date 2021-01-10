@@ -4,30 +4,32 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="profile__container">
-  <div class="media">
-    <div class="profile-img__container">
-      <img class="profile-img" src="{{ user.profile.image.url }}">
-    </div>
-    <div class="media-body">
-      <h2 class="account-heading">{{ user.username }}</h2>
-      <p class="text-secondary">{{ user.email }}</p>
-    </div>
-  </div>
-  
-   <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="text">
-                Profile Info
-            </legend>
-            {{ u_form|crispy }}
-            {{ p_form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+<div class="row justify-content-md-center">
+    <div class="card col-lg-5 my-box-shadow">
+        <div class="card-body">
+            <div class="profile-img__container">
+              <img class="profile-img" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="media-body">
+              <h2 class="account-heading">{{ user.username }}</h2>
+              <p class="text-secondary">{{ user.email }}</p>
+            </div>
+            <hr>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="text">
+                        Informacje profilowe
+                    </legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary" type="submit">Zaktualizuj</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
-      
+
 {% endblock content %}

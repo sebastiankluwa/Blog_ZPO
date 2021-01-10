@@ -5,25 +5,22 @@
 <div class="content-section">
 
 
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="login__desc">
-                Rejestracja
-            </legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Zarejestruj się</button>
+<div class="row justify-content-md-center">
+    <div class="card col-lg-4 my-box-shadow">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="login__desc" style="text-align: center;">
+                        Rejestracja
+                    </legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary" type="submit">Zarejestruj się</button>
+                </div>
+            </form>
         </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Masz już konto?
-            <a class="mr-2" href="{% url 'login' %}">Zaloguj się</a>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="mr-2" href="">Strona główna<a></a>
-        </small>
     </div>
 </div>
 {% endblock content %}
