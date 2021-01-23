@@ -48,6 +48,10 @@ class Post(models.Model):
         num = Comment.objects.filter(post_id=self.id)
         return num.count()
 
+    # Popularnosc posta - jeszcze nie uzywana funkcja
+    def popularity(self):
+        return self.num_of_likes()+self.num_of_comments()
+
     def likes_as_flat_user_id_list(self):
         return self.likes.values_list('id', flat=True)
 

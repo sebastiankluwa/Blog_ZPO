@@ -67,7 +67,7 @@
                         <form action="{% url 'blog_app:blogpost_like' obj.id %}" method="POST">
                         {% csrf_token %}
 
-                            {% if request.user.id in post.likes_as_flat_user_id_list %}
+                            {% if request.user.id in obj.likes_as_flat_user_id_list %}
                                 <button type="submit" name="post_id" value="{{obj.id}}" class="btn btn-primary"> {{ obj.num_of_likes }} <i class="fas fa-heart"></i> </button>
 
                             {% else %}
