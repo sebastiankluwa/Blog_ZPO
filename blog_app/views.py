@@ -11,11 +11,6 @@ class PostListView(ListView):
     template_name = 'index.html'
     context_object_name = 'obj'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["comments_list"] = Comment.objects.all()
-        return context
-
 
 class PostDetailView(DetailView):
     model = Post
@@ -24,7 +19,8 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["comments_list"] = Comment.objects.all()
+        post = Post.objects.filter(slug=self.kwargs['slug']).first()
+        context["comments_list"] = Comment.objects.filter(post=post)
         return context
     
 

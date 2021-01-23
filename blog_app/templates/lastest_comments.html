@@ -5,6 +5,6 @@
         <small>{{comment.get_date}}</small>
         </div>
         <p class="mb-1">{{comment.body|truncatechars:30}}</p>
-        <small>{{comment.author}}</small>
+        <small><strong>@{{comment.author}}</strong></small>
     </a>
 {% endfor %}
