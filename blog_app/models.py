@@ -20,6 +20,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    likes = models.ManyToManyField(User, related_name='post_likes')
 
     class Meta:
         ordering = ('-publish',)
@@ -39,6 +40,12 @@ class Post(models.Model):
                               self.publish.strftime('%m'),
                               self.publish.strftime('%d'),
                               self.slug])
+
+    def num_of_likes(self):
+        return self.likes.count()
+
+    def likes_as_flat_user_id_list(self):
+        return self.likes.values_list('id', flat=True)
 
 
 class Comment(models.Model):
