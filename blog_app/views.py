@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Post, Comment
+from user_app.models import Profile
 
 
 class PostListView(ListView):
@@ -13,6 +14,12 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'obj'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comments_list"] = Comment.objects.all()
+
+        return context
+    
 
 
 class PostCreateView(CreateView):

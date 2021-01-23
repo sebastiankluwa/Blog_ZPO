@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from datetime import datetime
 
 
 class Post(models.Model):
@@ -19,7 +20,6 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    objects = models.Manager()
 
     class Meta:
         ordering = ('-publish',)
@@ -52,4 +52,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Komentarz dodany przez dla posta {}'.format(self.post)
+
+    def get_date(self):
+        time = datetime.now()
+        if self.created.day == time.day:
+            return str(time.hour - self.created.hour) + " godzin temu"
+        else:
+            if self.created.month == time.month:
+                return str(time.day - self.created.day) + " dni temu"
+            else:
+                if self.created.year == time.year:
+                    return str(time.month - self.created.month) + " miesięcy temu"
+        return self.created
 
