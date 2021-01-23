@@ -64,7 +64,7 @@
                         <button class="btn btn-primary mr-2" style="height: 38px; cursor: auto"> {{ obj.num_of_comments }} <i class="far fa-comment"></i></button>
           <!-- Like button -->
                         {% if request.user.is_authenticated %}
-                        <form action="{% url 'blog_app:blogpost_like' obj.id %}" method="POST">
+                        <form action="{% url 'blog_app:blogpost_like' 1 %}" method="POST">
                         {% csrf_token %}
 
                             {% if request.user.id in obj.likes_as_flat_user_id_list %}

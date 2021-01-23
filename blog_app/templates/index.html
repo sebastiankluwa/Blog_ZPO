@@ -101,7 +101,7 @@
 
                         <!-- Like button -->
                         {% if request.user.is_authenticated %}
-                        <form action="{% url 'blog_app:blogpost_like' post.id %}" method="POST">
+                        <form action="{% url 'blog_app:blogpost_like' 0 %}" method="POST">
                         {% csrf_token %}
 
                             {% if request.user.id in post.likes_as_flat_user_id_list %}

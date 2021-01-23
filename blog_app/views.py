@@ -34,7 +34,8 @@ class PostCreateView(CreateView):
         return super(PostCreateView, self).form_valid(form)
 
 
-def blog_post_like(request, pk):
+# to_page=0 - homepage to_page=1 - detailview
+def blog_post_like(request, to_page):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
     is_liked = post.likes.filter(id=request.user.id).first()
     if is_liked:
@@ -42,4 +43,13 @@ def blog_post_like(request, pk):
     else:
         post.likes.add(request.user)
 
-    return HttpResponseRedirect(reverse('blog_app:post_list'))
+    if to_page == 0:
+        return HttpResponseRedirect(reverse('blog_app:post_list'))
+    else:
+        return HttpResponseRedirect(reverse('blog_app:post_detail',
+                                            kwargs={"year": post.created.year, "month": post.created.month,
+                                                    "day": post.created.day, "slug": post.slug}))
+
+
+
+
