@@ -1,6 +1,8 @@
 from django import template
 from django.db.models import Count
 from ..models import Post, Comment
+import logging
+logger = logging.getLogger(__name__)
 
 # from django.utils.safestring import mark_safe
 # import markdown
@@ -22,7 +24,7 @@ def show_latest_comments(count=5):
 # Most liked posts
 @register.simple_tag
 def get_most_commented_posts(count=5):
-    return Post.objects.annotate(total_likes=Count('popularity')).order_by('-total_likes')[:count]
+    return Post.objects.order_by('-popularity')[:count]
 
 # @register.filter(name='markdown')
 # def markdown_format(text):

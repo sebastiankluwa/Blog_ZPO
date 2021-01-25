@@ -102,6 +102,7 @@
         <hr>
 
         <!-- Comments Form -->
+        {% if request.user.is_authenticated %}
         <div class="card my-4">
           <h5 class="card-header">Zostaw komentarz:</h5>
           <div class="card-body">
@@ -115,7 +116,7 @@
             </form>
           </div>
         </div>
-
+        {% endif %}
         {% for comment in comments_list %}
           <div class="media mb-4 mt-4">
             <img style="max-width: 50px;" class="d-flex mr-3 rounded-circle" src="{{ comment.author.profile.image.url }}" alt="Sample image">

@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 from datetime import datetime
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -50,7 +52,12 @@ class Post(models.Model):
         return num.count()
 
     def num_of_popularity(self):
+        # test=datetime.now().date()-datetime.date(self.publish)
+        # if test.days < 15:
         self.popularity = self.num_of_likes()+self.num_of_comments()
+        self.save()
+        # else:
+        #     self.popularity = 0
         return self.popularity
 
     def likes_as_flat_user_id_list(self):

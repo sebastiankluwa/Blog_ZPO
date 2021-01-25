@@ -33,7 +33,8 @@ class PostDetailView(DetailView, FormMixin):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         post = Post.objects.filter(slug=self.kwargs['slug']).first()
         context["comments_list"] = Comment.objects.filter(post=post)
-        context['form'] = CommentCreateForm(initial={'post': self.object, 'author': self.request.user.profile})
+        if self.request.user.is_authenticated:
+            context['form'] = CommentCreateForm(initial={'post': self.object, 'author': self.request.user.profile})
         return context
 
     def post(self, request, *args, **kwargs):
