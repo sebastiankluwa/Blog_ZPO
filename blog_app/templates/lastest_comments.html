@@ -1,7 +1,7 @@
 {% for comment in latest_comments %}
     <a href="{{ comment.post.get_absolute_url }}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{comment.post.title}}</h5>
+        <h6 class="mb-1">{{comment.post.title}}</h6>
         <small>{{comment.get_date}}</small>
         </div>
         <p class="mb-1">{{comment.body|truncatechars:30}}</p>

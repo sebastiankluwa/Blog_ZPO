@@ -70,6 +70,7 @@ def blog_post_like(request, to_page):
     else:
         post.likes.add(request.user)
 
+    post.num_of_popularity()
     if to_page == 0:
         return HttpResponseRedirect(reverse('blog_app:post_list'))
     else:

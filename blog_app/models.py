@@ -52,12 +52,12 @@ class Post(models.Model):
         return num.count()
 
     def num_of_popularity(self):
-        # test=datetime.now().date()-datetime.date(self.publish)
-        # if test.days < 15:
-        self.popularity = self.num_of_likes()+self.num_of_comments()
+        test=datetime.now().date()-datetime.date(self.publish)
+        if test.days < 15:
+            self.popularity = self.num_of_likes()+self.num_of_comments()
+        else:
+            self.popularity = 0
         self.save()
-        # else:
-        #     self.popularity = 0
         return self.popularity
 
     def likes_as_flat_user_id_list(self):

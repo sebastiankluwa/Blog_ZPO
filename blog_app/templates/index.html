@@ -92,7 +92,7 @@
                         <!-- Excerpt -->
                         <p class="dark-grey-text">{{ post.body|truncatechars:100 }}</p>
                         <!-- Post data -->
-                        <p> <span class="font-weight-bold">@{{ post.author.username }}</span>, {{ post.created }}</p>
+                        <p> <span class="font-weight-bold">@{{ post.author.username }}</span>, {{ post.publish }}</p>
 
                         <div class="btn-container d-flex">
                         <!-- num of comments -->
@@ -146,7 +146,7 @@
                         {% get_most_commented_posts as most_commented_posts%}
                         {% for post in most_commented_posts %}
                           <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <p class="lead"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
+                            <h6 class=""><a href="{{ post.get_absolute_url }}" style="text-decoration: none; color: #495057">{{post.title}}</a></h6>
                           <span class="badge badge-primary badge-pill">{{ post.num_of_popularity }}</span>
                           </li>
                         {% endfor %}
