@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +13,8 @@
   </head>
   <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <div class="container">
   <a class="navbar-brand" href="{% url 'blog_app:post_list' %}">
     <img src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
     Blog
@@ -26,14 +28,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'blog_app:post_list' %}">Strona główna <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link" href="#">Użytkownicy</a>
-      </li>
+      </li> {% endcomment %}
     </ul>
-    <form class="form-inline my-2 my-lg-0 mr-3">
+    {% comment %} <form class="form-inline my-2 my-lg-0 mr-3">
       <input class="form-control mr-sm-2" type="search" placeholder="Szukaj" aria-label="Search">
       <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Szukaj</button>
-    </form>
+    </form> {% endcomment %}
   {% if user.is_authenticated %}
     <a class="btn btn-outline-primary" href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i> Profil</a>
     <a class="btn btn-outline-primary ml-2" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Wyloguj się</a>
@@ -41,6 +43,7 @@
       <a class="ml-sm-2 btn btn-outline-success" href="{% url 'login' %}">Zaloguj się <span class="sr-only">(current)</span></a>
       <a class="ml-sm-2 btn btn-outline-success" href="{% url 'register' %}">Zarejestruj się <span class="sr-only">(current)</span></a>
   {% endif %}
+  </div>
   </div>
 </nav>
 
@@ -102,23 +105,26 @@
         <div class="card my-4">
           <h5 class="card-header">Zostaw komentarz:</h5>
           <div class="card-body">
-            <form>
-              <div class="form-group">
+            <form method="post" >
+              {{ form|crispy }}
+              {% csrf_token %}
+              {% comment %} <div class="form-group">
                 <textarea class="form-control" rows="3"></textarea>
-              </div>
+              </div> {% endcomment %}
               <button type="submit" class="btn btn-primary">Opublikuj</button>
             </form>
           </div>
         </div>
 
         {% for comment in comments_list %}
-          <div class="media mb-4">
+          <div class="media mb-4 mt-4">
             <img style="max-width: 50px;" class="d-flex mr-3 rounded-circle" src="{{ comment.author.profile.image.url }}" alt="Sample image">
             <div class="media-body">
               <h5 class="mt-0">@{{comment.author}}</h5>
               {{comment.body}}
             </div>
           </div>
+           <hr>
         {% endfor %}
         <!-- Single Comment -->
       
@@ -131,7 +137,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; WaWski 2020</p>
+                    <p>Copyright &copy; Projekt ZPO, wykonanie: Jędrzej Matuszewski, Sebastian Kluwa</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

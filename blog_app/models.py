@@ -11,16 +11,17 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250,verbose_name= "Tytuł")
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
-    img = models.ImageField(default='post_pics/default.png', upload_to='post_pics/')
+    body = models.TextField(verbose_name= "Treść")
+    img = models.ImageField(default='post_pics/default.png', upload_to='post_pics/', verbose_name= "Obrazek")
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    likes = models.ManyToManyField(User, related_name='post_likes')
+    likes = models.ManyToManyField(User, related_name='post_likes', null=True)
+    popularity = models.IntegerField(default=0)
 
     class Meta:
         ordering = ('-publish',)
@@ -48,9 +49,9 @@ class Post(models.Model):
         num = Comment.objects.filter(post_id=self.id)
         return num.count()
 
-    # Popularnosc posta - jeszcze nie uzywana funkcja
-    def popularity(self):
-        return self.num_of_likes()+self.num_of_comments()
+    def num_of_popularity(self):
+        self.popularity = self.num_of_likes()+self.num_of_comments()
+        return self.popularity
 
     def likes_as_flat_user_id_list(self):
         return self.likes.values_list('id', flat=True)

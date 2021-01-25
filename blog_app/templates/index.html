@@ -14,6 +14,7 @@
   <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
   <a class="navbar-brand" href="{% url 'blog_app:post_list' %}">
     <img src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
     Blog
@@ -27,14 +28,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Strona główna <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Użytkownicy</a>
-      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 mr-3">
+    {% comment %} <form class="form-inline my-2 my-lg-0 mr-3">
       <input class="form-control mr-sm-2" type="search" placeholder="Szukaj" aria-label="Search">
       <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Szukaj</button>
-    </form>
+    </form> {% endcomment %}
 
 {% if user.is_authenticated %}
   <a class="btn btn-outline-primary" href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i> Profil</a>
@@ -43,6 +41,7 @@
     <a class="ml-sm-2 btn btn-outline-success" href="{% url 'login' %}">Zaloguj się <span class="sr-only">(current)</span></a>
     <a class="ml-sm-2 btn btn-outline-success" href="{% url 'register' %}">Zarejestruj się <span class="sr-only">(current)</span></a>
 {% endif %}
+  </div>
   </div>
 </nav>
 
@@ -134,14 +133,8 @@
                 {% endfor %}
 
                 <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Starsze</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Nowsze &rarr;</a>
-                    </li>
-                </ul>
+                <a class="btn btn-primary" href="#">&larr; Starsze</a>
+                <a class="btn btn-primary" href="#">Nowsze &rarr;</a>
 
             </div>
 
@@ -154,7 +147,7 @@
                         {% for post in most_commented_posts %}
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                             <p class="lead"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
-                          <span class="badge badge-primary badge-pill">{{ post.num_of_likes }}</span>
+                          <span class="badge badge-primary badge-pill">{{ post.num_of_popularity }}</span>
                           </li>
                         {% endfor %}
                     </ul>
@@ -180,7 +173,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; WaWski 2020</p>
+                    <p>Copyright &copy; Projekt ZPO, wykonanie: Jędrzej Matuszewski, Sebastian Kluwa</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
